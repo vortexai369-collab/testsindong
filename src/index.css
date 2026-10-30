@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@import url('https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/subsets/AppleSDGothicNeo-dynamic-subset.css');
+
+@font-face {
+  font-family: "Apple SD 산돌고딕 Neo";
+  src: local("Apple SD 산돌고딕 Neo"), local("AppleSDGothicNeo");
+}
 
 :root {
   --bg: #fff;
@@ -12,8 +18,8 @@
   --B: #4a5ce8;
   --C: #d99a0b;
   --D: #e8622a;
-  --sans: "Noto Sans KR", system-ui, sans-serif;
-  --serif: "Noto Serif KR", Georgia, serif;
+  --sans: "Apple SD 산돌고딕 Neo", "Apple SD Gothic Neo", -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
+  --serif: "Apple SD 산돌고딕 Neo", "Apple SD Gothic Neo", -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
   box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
@@ -41,6 +47,10 @@
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
 }
 
 html {
@@ -687,6 +697,50 @@ td input.no {
   font-size: 0.92em;
 }
 
+/* 통지표 성취수준 등급(A~D): 성적입력 성취수준 등급 기준(cutc)과 동일한 뱃지 디자인 */
+.sheet .g {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff !important;
+  line-height: 1;
+  vertical-align: middle;
+  flex: none;
+}
+
+.sheet .g.A { background-color: var(--A) !important; }
+.sheet .g.B { background-color: var(--B) !important; }
+.sheet .g.C { background-color: var(--C) !important; }
+.sheet .g.D { background-color: var(--D) !important; }
+
+.sheet .grade-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff !important;
+  line-height: 1;
+  vertical-align: middle;
+  flex: none;
+}
+
+.sheet .grade-badge.A { background-color: var(--A) !important; }
+.sheet .grade-badge.B { background-color: var(--B) !important; }
+.sheet .grade-badge.C { background-color: var(--C) !important; }
+.sheet .grade-badge.D { background-color: var(--D) !important; }
+
+.sheet .grade-text-A { color: #12a36b; font-weight: 700; }
+.sheet .grade-text-B { color: #4a5ce8; font-weight: 700; }
+.sheet .grade-text-C { color: #d99a0b; font-weight: 700; }
+.sheet .grade-text-D { color: #e8622a; font-weight: 700; }
+
 dialog {
   border: 1px solid var(--line);
   border-radius: 18px;
@@ -985,6 +1039,32 @@ dialog.print-dlg {
     font-size: 16.11px !important;
     font-weight: bold !important;
   }
+  .sheet .g,
+  .sheet .grade-badge {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color: #ffffff !important;
+  }
+  .sheet .g.A,
+  .sheet .grade-badge.A {
+    background-color: #12a36b !important;
+  }
+  .sheet .g.B,
+  .sheet .grade-badge.B {
+    background-color: #4a5ce8 !important;
+  }
+  .sheet .g.C,
+  .sheet .grade-badge.C {
+    background-color: #d99a0b !important;
+  }
+  .sheet .g.D,
+  .sheet .grade-badge.D {
+    background-color: #e8622a !important;
+  }
+  .sheet .grade-text-A { color: #12a36b !important; }
+  .sheet .grade-text-B { color: #4a5ce8 !important; }
+  .sheet .grade-text-C { color: #d99a0b !important; }
+  .sheet .grade-text-D { color: #e8622a !important; }
   .pg {
     padding: 10mm !important;
     box-sizing: border-box !important;

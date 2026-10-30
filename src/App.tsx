@@ -682,13 +682,13 @@ export default function App() {
 <head>
 <meta charset="utf-8">
 <title>${settings.grade}학년 ${settings.cls}반 ${settings.sem}학기 총괄평가 성적표</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/AppleSDGothicNeo/subsets/AppleSDGothicNeo-dynamic-subset.css">
 <style>
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-body{margin:0;padding:20px;background:#fff;color:#111;font-family:"Noto Sans KR",system-ui,sans-serif}
+body{margin:0;padding:20px;background:#fff;color:#111;font-family:"Apple SD 산돌고딕 Neo","Apple SD Gothic Neo",-apple-system,BlinkMacSystemFont,"Noto Sans KR",system-ui,sans-serif}
 .pg{max-width:210mm;margin:0 auto 24px}
-.sheet{background:#fff;color:#111;border:1px solid #64748b;border-radius:10px;padding:20px;font-size:${rep.fs}px;line-height:1.55;margin-bottom:8mm}
-.sheet h2{font-family:"Noto Serif KR",Georgia,serif;font-size:1.5em;text-align:center;border-bottom:2px solid #111;padding-bottom:8px;margin:0 0 12px}
+.sheet{background:#fff;color:#111;border:1px solid #64748b;border-radius:10px;padding:20px;font-size:${rep.fs}px;line-height:1.55;margin-bottom:8mm;font-family:"Apple SD 산돌고딕 Neo","Apple SD Gothic Neo",-apple-system,BlinkMacSystemFont,"Noto Sans KR",system-ui,sans-serif}
+.sheet h2{font-family:"Apple SD 산돌고딕 Neo","Apple SD Gothic Neo",-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;font-size:1.5em;text-align:center;border-bottom:2px solid #111;padding-bottom:8px;margin:0 0 12px}
 .sheet table{width:100%;border-collapse:collapse;margin-bottom:10px;font-size:1em}
 .sheet th,.sheet td{border:1px solid #64748b;padding:5px 7px;color:#111;text-align:center}
 .sheet td{font-weight:bold}
@@ -701,8 +701,26 @@ body{margin:0;padding:20px;background:#fff;color:#111;font-family:"Noto Sans KR"
 .sheet .opi-body p:last-child{margin-bottom:0}
 .sheet .sign{text-align:right;margin-top:8px;font-size:16.11px;font-weight:bold}
 .sheet .guide td,.sheet .guide th{font-size:.92em}
+.sheet .g,.sheet .grade-badge{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:6px;font-weight:700;font-size:13px;color:#fff!important;line-height:1;vertical-align:middle;flex:none}
+.sheet .g.A,.sheet .grade-badge.A{background-color:#12a36b!important}
+.sheet .g.B,.sheet .grade-badge.B{background-color:#4a5ce8!important}
+.sheet .g.C,.sheet .grade-badge.C{background-color:#d99a0b!important}
+.sheet .g.D,.sheet .grade-badge.D{background-color:#e8622a!important}
+.sheet .grade-text-A{color:#12a36b;font-weight:700}
+.sheet .grade-text-B{color:#4a5ce8;font-weight:700}
+.sheet .grade-text-C{color:#d99a0b;font-weight:700}
+.sheet .grade-text-D{color:#e8622a;font-weight:700}
 .pg2 .sheet{height:134mm;overflow:hidden}
-@media print{body{padding:0}.pg{padding:10mm;box-sizing:border-box;margin:0;break-after:page}.pg:last-child{break-after:auto}@page{size:A4 portrait;margin:0}}
+@media print{body{padding:0}.pg{padding:10mm;box-sizing:border-box;margin:0;break-after:page}.pg:last-child{break-after:auto}@page{size:A4 portrait;margin:0}
+.sheet .g,.sheet .grade-badge{-webkit-print-color-adjust:exact;print-color-adjust:exact;color:#fff!important}
+.sheet .g.A,.sheet .grade-badge.A{background-color:#12a36b!important}
+.sheet .g.B,.sheet .grade-badge.B{background-color:#4a5ce8!important}
+.sheet .g.C,.sheet .grade-badge.C{background-color:#d99a0b!important}
+.sheet .g.D,.sheet .grade-badge.D{background-color:#e8622a!important}
+.sheet .grade-text-A{color:#12a36b!important}
+.sheet .grade-text-B{color:#4a5ce8!important}
+.sheet .grade-text-C{color:#d99a0b!important}
+.sheet .grade-text-D{color:#e8622a!important}}
 </style>
 </head>
 <body>
@@ -762,22 +780,22 @@ ${paEl.innerHTML}
           </thead>
           <tbody>
             <tr>
-              <td>A</td>
+              <td>{renderBadge('A')}</td>
               <td>{data.cut.A}% 이상</td>
               <td className="l">{LV.A[1]}</td>
             </tr>
             <tr>
-              <td>B</td>
+              <td>{renderBadge('B')}</td>
               <td>{data.cut.B}% 이상</td>
               <td className="l">{LV.B[1]}</td>
             </tr>
             <tr>
-              <td>C</td>
+              <td>{renderBadge('C')}</td>
               <td>{data.cut.C}% 이상</td>
               <td className="l">{LV.C[1]}</td>
             </tr>
             <tr>
-              <td>D</td>
+              <td>{renderBadge('D')}</td>
               <td>{data.cut.C}% 미만</td>
               <td className="l">{LV.D[1]}</td>
             </tr>
@@ -798,9 +816,7 @@ ${paEl.innerHTML}
               return (
                 <tr key={s}>
                   <td>{s}</td>
-                  <td>
-                    <b>{g}</b>
-                  </td>
+                  <td>{renderBadge(g)}</td>
                   <td className="l">
                     ‘{g}’ 수준으로 {LV[g][1]}
                   </td>
@@ -1058,7 +1074,7 @@ ${paEl.innerHTML}
                                 </label>
                               ))}
                               <div className="cutc">
-                                {renderBadge('D')}미흡 <b id="cdv">{data.cut.C}점 미만</b>
+                                {renderBadge('D')}미흡 <b id="cdv" style={{ fontWeight: 'normal' }}>{data.cut.C}점 미만</b>
                               </div>
                             </div>
                           </div>
@@ -1068,10 +1084,11 @@ ${paEl.innerHTML}
                             <p className="d">
                               입력 즉시 자동 저장됩니다. 행을 선택하면 아래 미리보기가 바뀝니다.
                             </p>
-                             <div className="tools">
+                            <div className="tools">
                               <button
                                 type="button"
                                 className="btn sm dark"
+                                style={{ backgroundColor: '#ffffff', color: '#000000', fontFamily: '"Apple SD 산돌고딕 Neo", "Apple SD Gothic Neo", sans-serif', fontWeight: 'bold' }}
                                 onClick={handleAddStudent}
                               >
                                 학생 1명 추가
@@ -1079,6 +1096,7 @@ ${paEl.innerHTML}
                               <button
                                 type="button"
                                 className="btn sm"
+                                style={{ fontWeight: 'bold' }}
                                 onClick={handleOpenBulk}
                               >
                                 이름 일괄 등록
@@ -1086,14 +1104,15 @@ ${paEl.innerHTML}
                               <button
                                 type="button"
                                 className="btn sm"
-                                style={{ background: '#e0e7ff', color: '#3730a3', borderColor: '#c7d2fe' }}
+                                style={{ backgroundColor: '#ffffff', fontWeight: 'bold' }}
                                 onClick={() => handleOpenBulkScores()}
                               >
-                                ⚡ 과목별 점수 일괄 입력
+                                과목별 점수 일괄 입력
                               </button>
                               <button
                                 type="button"
                                 className="btn sm"
+                                style={{ fontWeight: 'bold' }}
                                 onClick={handleSortStudents}
                               >
                                 번호 정렬
@@ -1101,6 +1120,7 @@ ${paEl.innerHTML}
                               <button
                                 type="button"
                                 className="btn sm red"
+                                style={{ fontWeight: 'bold' }}
                                 onClick={handleClearStudents}
                               >
                                 {clearArmed ? '한 번 더 누르면 모두 삭제' : '비우기'}
@@ -1353,21 +1373,6 @@ ${paEl.innerHTML}
                                       {s.number}번 {s.name}
                                     </option>
                                   ))}
-                                </select>
-                              </label>
-                              <label>
-                                페이지당 인쇄 매수
-                                <select
-                                  value={rep.per}
-                                  onChange={(e) =>
-                                    setRep((prev) => ({
-                                      ...prev,
-                                      per: parseInt(e.target.value, 10) as 1 | 2,
-                                    }))
-                                  }
-                                >
-                                  <option value={1}>A4 1명씩</option>
-                                  <option value={2}>A4 2명씩</option>
                                 </select>
                               </label>
                               <label>
