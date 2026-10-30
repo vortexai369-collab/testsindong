@@ -1,0 +1,6 @@
+{
+  "name": "총괄평가 자동화",
+  "description": "국어·수학·영어 점수를 넣으면 A~D 성취수준이 자동으로 정해지고, 선생님이 써 둔 피드백 문구가 A4 통지표에 채워지는 학급 총괄평가 결과 출력 시스템입니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
